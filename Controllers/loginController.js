@@ -56,7 +56,7 @@ export const loginUser = async (req,res) => {
         }
         const userID = findUser._id.toString();
         const token = await generateToken(userID);
-        const jwtToken = jwt.sign({id: userID, token, userName: findUser.name , userEmailId : findUser.email}, signInKey , {expiresIn : '1h'});
+        const jwtToken = jwt.sign({id: userID, token, userName: findUser.name , userEmailId : findUser.email}, signInKey , {expiresIn : '30m'});
         res.status(200).json({ message: "Login Successfull",jwtToken : jwtToken});
       } catch (error) {
         console.log(error);
