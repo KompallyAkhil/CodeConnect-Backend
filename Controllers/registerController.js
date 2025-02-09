@@ -1,8 +1,18 @@
 import Register from "../model/User.js";
 import bcrypt from "bcrypt";
 
-export const registerUser = async (req,res) => {
-    const { name, email, password } = req.body;
+function validateEmail(email) {
+  const keys =
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  if (email && email.match(keys)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+export const registerUser = async (req, res) => {
+  const { name, email, password } = req.body;
   if (!name || !email || !password) {
     return res.status(400).json({ message: "Please Enter all the fields" });
   }
@@ -10,6 +20,10 @@ export const registerUser = async (req,res) => {
     const newUser = await Register.findOne({ name });
     if (newUser) {
       return res.status(400).json({ message: "User Already Exists" });
+    }
+    const emailValidation = validateEmail(email);
+    if(!emailValidation){
+      return res.status(400).json({ message: "Enter a Valid email address" });
     }
     const newEmail = await Register.findOne({ email });
     if (newEmail) {
@@ -27,4 +41,4 @@ export const registerUser = async (req,res) => {
   } catch (error) {
     console.log(error);
   }
-}
+};
