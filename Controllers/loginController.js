@@ -1,5 +1,4 @@
 import Register from "../model/User.js";
-import express from "express";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 dotenv.config();
@@ -7,7 +6,6 @@ import jwt from "jsonwebtoken";
 import { StreamChat } from 'stream-chat';
 const apiKey = process.env.API_KEY;
 const apiSecret = process.env.API_SECRET;
-const router = express.Router();
 const slugs = ['Python', 'JavaScript', 'Java', 'Rust', 'C', 'Go'];
 const serverClient = StreamChat.getInstance(apiKey, apiSecret);
 const defaultUserId = "admin"; 
