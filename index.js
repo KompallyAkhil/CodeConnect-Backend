@@ -7,7 +7,7 @@ import login from "./Routes/Login.js"
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
-const allowedOrigins = ["http://localhost:5173","https://code-connect-beta.vercel.app"]
+const allowedOrigins = ["http://localhost:5173","https://code-connect-beta.vercel.app","https://codeconnect.akhilkompally.app"]
 app.use(express.json());
 app.options('*', cors());
 app.use(cors({
